@@ -1,0 +1,19 @@
+.content {
+    height: 100vh;
+    width: 100%;
+}
+
+.header {
+    width: 100%;
+    padding: 5px 15px;
+    background-color: aqua;
+}
+
+.footer {
+    width: 100%;
+}
+
+.copy {
+    width: 100%;
+    text-align: center;
+}
