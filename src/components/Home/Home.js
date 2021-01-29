@@ -3,7 +3,6 @@ import style from './Home.module.css'
 const Home = (props) => {
     return(
         <>
-        <div className={style.spaceNavbar}></div>
         <Jumbotron>
             <Container>
                 <h1>Hello, world!</h1>
