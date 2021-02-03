@@ -8,15 +8,17 @@ import {Switch, Route} from 'react-router-dom';
 
 function App() {
   return (
-        <div>
-          <Layout>
-            <Switch>
-              <Route path="/" exact component={Home} />
-              <Route path="/about" component={About} />
-              <Route path="/products" component={Products} />
-            </Switch>
-          </Layout>
-        </div>
+    <div>
+      <Layout>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/products" component={Products} />
+          <Route path="/contact" component={Products} />
+          <Route path="/products" component={Products} />
+        </Switch>
+      </Layout>
+    </div>
   );
 }
 
