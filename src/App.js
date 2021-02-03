@@ -16,6 +16,7 @@ function App() {
           <Route path="/products" component={Products} />
           <Route path="/contact" component={Products} />
           <Route path="/products" component={Products} />
+          <Route path="/cart" component={Products} /> 
         </Switch>
       </Layout>
     </div>
