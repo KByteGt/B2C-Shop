@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ToolBar from '../../components/Navigation/ToolBar/ToolBar';
+import NavBar from '../../components/Navigation/NavBar/NavBar';
 import style from './Layout.module.css';
 
 class Layout extends Component {
@@ -8,7 +8,7 @@ class Layout extends Component {
             <>
                 <div>
                     <header className={style.header}>
-                        <ToolBar/>
+                        <NavBar/>
                     </header>
 
                     <main className={style.content}>

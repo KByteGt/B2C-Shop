@@ -1,5 +1,4 @@
 import style from './ToolBar.module.css';
-import NavItems from '../NavItems/NavItems';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -9,7 +8,7 @@ import Button from 'react-bootstrap/Button'
 import { Container } from 'react-bootstrap';
 
 
-function ToolBar(props) {
+function NavBar(props) {
     return (
         <Navbar bg="light" expand="lg" fixed="top">
             <Container>
@@ -37,13 +36,8 @@ function ToolBar(props) {
                 </Navbar.Collapse>
             </Container>
         </Navbar>
-        /*<div className={style.ToolBar}>
-            <nav>
-                <h3>Logo</h3>
-                <NavItems />
-            </nav>
-    </div>*/
+       
     );
 }
 
-export default ToolBar;
+export default NavBar;
