@@ -1,0 +1,11 @@
+.bg_hero {
+    background-image: url('https://lh3.googleusercontent.com/proxy/Wlh8PHARoMep1PAkwtoJw-2A32JLjLmy1ufjxmi43WqDP777hgI5Mvq2V_wZMaqyiF7N7rnmgf-ho8DbhqgC8ayOLaBSM2o8uQbaqBYtvkC1fDDi76xqW-P7mu13wUBeJr8C9Q');
+    background-repeat: no-repeat;
+    background-size: 460px;
+    background-position-y: 25px;
+    background-position-x: 98%;
+}
+
+.hero_content {
+    width: 72%;
+}
