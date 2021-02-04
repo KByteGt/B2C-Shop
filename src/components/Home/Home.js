@@ -5,7 +5,7 @@ const Home = (props) => {
         <>
         <Jumbotron>
             <Container>
-                <h1>Hello, world!</h1>
+                <h1>Hello, Fortniter!</h1>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac velit tortor. Integer non lorem sed nunc congue feugiat et eleifend tortor. Ut vulputate urna mi, et accumsan purus placerat id. 
                 </p>
@@ -15,7 +15,9 @@ const Home = (props) => {
             </Container>
         </Jumbotron>
         <Container>
-            <h1>Most Popular Products</h1>
+            <h1>Most Popular Items</h1>
+            <hr />
+
         </Container>
         </>
     )
