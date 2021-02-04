@@ -7,6 +7,9 @@ import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button'
 import { Container } from 'react-bootstrap';
 import icon from '../../../assets/img/death-star.png';
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 
 function NavBar(props) {
@@ -21,7 +24,8 @@ function NavBar(props) {
                         height="30"
                         className="d-inline-block align-top"
                     />
-                    SW-Shop
+                    &nbsp;
+                     DS-Shop
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -43,7 +47,12 @@ function NavBar(props) {
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                         <Button variant="outline-dark">Search</Button>
                     </Form>
-                    <Nav.Link href="/cart">Shopping Cart</Nav.Link>
+                    
+                    <Nav.Link href="/cart" variant="dark">
+                        <FontAwesomeIcon icon={faShoppingCart} style={{color: '#555'}}/>
+                    </Nav.Link>
+                    
+                    
                 </Navbar.Collapse>
             </Container>
         </Navbar>
