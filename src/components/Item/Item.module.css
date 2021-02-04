@@ -1,0 +1,25 @@
+
+.bg_uncommon {
+    background: rgb(27,68,16);
+    background: linear-gradient(10deg, rgba(27,68,16,1) 0%, rgba(21,121,9,1) 23%, rgba(176,255,0,1) 100%);
+}
+
+.bg_rare {
+    background: rgb(2,0,36);
+    background: linear-gradient(10deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 23%, rgba(0,212,255,1) 100%);
+}
+
+.bg_epic {
+    background: rgb(2,0,36);
+    background: linear-gradient(10deg, rgba(2,0,36,1) 0%, rgba(52,9,121,1) 23%, rgba(252,0,255,1) 100%);
+}
+
+.bg_legendary {
+    background: rgb(62,50,11);
+    background: linear-gradient(10deg, rgba(62,50,11,1) 0%, rgba(121,78,9,1) 23%, rgba(255,188,0,1) 100%);
+}
+
+.bg_default{
+    background: rgb(69,73,58);
+    background: linear-gradient(10deg, rgba(69,73,58,1) 0%, rgba(100,121,116,1) 23%, rgba(215,214,214,1) 100%);
+}

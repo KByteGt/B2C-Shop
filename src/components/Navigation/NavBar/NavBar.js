@@ -11,7 +11,6 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-
 function NavBar(props) {
     return (
         <Navbar bg="light" expand="lg" fixed="top">

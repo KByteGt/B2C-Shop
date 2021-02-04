@@ -1,4 +1,5 @@
 import {Jumbotron, Button, Container } from 'react-bootstrap';
+import PopularItems from '../../containers/PopularItems/PopularItems'
 import style from './Home.module.css'
 const Home = (props) => {
     return(
@@ -15,8 +16,14 @@ const Home = (props) => {
             </Container>
         </Jumbotron>
         <Container>
-            <h1>Most Popular Items</h1>
+
+            <PopularItems />
+
+            <h1>Explore Rarity</h1>
             <hr />
+                
+            <h1>Lorem Impsun Dolor sit me.</h1>
+            <Button>Shop</Button>
 
         </Container>
         </>
