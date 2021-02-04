@@ -51,9 +51,6 @@ const PopularItems = (props) => {
                         />
             });
         }
-        
-        
-
         //Render
         return (
             <CardDeck
