@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button'
 import { Container } from 'react-bootstrap';
-import icon from '../../../assets/img/death-star.png';
+import icon from '../../../assets/img/f-logo.png';
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -25,7 +25,7 @@ function NavBar(props) {
                         className="d-inline-block align-top"
                     />
                     &nbsp;
-                     DS-Shop
+                     F-Shop
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
