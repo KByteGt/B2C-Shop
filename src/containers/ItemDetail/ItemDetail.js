@@ -1,6 +1,9 @@
 import { useEffect, useState} from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Card, Breadcrumb, Button, ListGroup, ListGroupItem  } from 'react-bootstrap';
+import ItemCard from '../../components/Item/ItemCard';
+import ItemInfo from '../../components/Item/ItemInfo';
 import api from '../../axios';
+import PopularItems from '../PopularItems/PopularItems';
 
 const ItemDetail = (props) => {
     const itemId = props.match.params.itemId;
@@ -15,7 +18,6 @@ const ItemDetail = (props) => {
         cost: 0,
         imgIcon: '',
         imgFeatured: '',
-        imgBackground: '',
         avgStars: 0,
         firstOccurrences: '',
         lastOccurrences: '',
@@ -27,24 +29,77 @@ const ItemDetail = (props) => {
         //Consume API
         api.get('/item/get?id=' + itemId)
             .then( response => {
+                let item = response.data.data;
+
+                setItemState({
+                    id: item.itemId,
+                    name: item.item.name,
+                    description: item.item.description,
+                    type: item.item.type,
+                    rarity: item.item.rarity,
+                    series: item.item.series,
+                    cost: item.item.cost,
+                    imgIcon: item.item.images.icon,
+                    imgFeatured: item.item.images.featured,
+                    avgStars: item.item.ratings.avgStars,
+                    firstOccurrences: item.itemOccurrences.firstOccurrences,
+                    lastOccurrences: item.itemOccurrences.lastOccurrences,
+                    occurrences: item.itemOccurrences.occurrences
+                });
 
             })
             .catch( err => {
-
+                console.log(" **Error: " + err);
             });
     })
+
+    let itemSeries = (itemState.series === null) ?  "Fortnite" : itemState.series;
 
     //Render
     return (
         <Container>
+            <br/>
+            <Breadcrumb>
+                <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+                <Breadcrumb.Item href="/catalogue">Catalogue</Breadcrumb.Item>
+                <Breadcrumb.Item active>{itemState.name}</Breadcrumb.Item>
+            </Breadcrumb>
+
             <Row>
-                <Col>
-                    <h1>Item Detail</h1>
+                <Col xs={12} md={3}>
+                
+                    <Button size="lg" block>Buy for Q{ itemState.cost }</Button>
+                    <br/>
+                    {/* Component ItemCard whit params */}
+                    <ItemCard 
+                        img = { itemState.imgIcon} 
+                        description = { itemState.description }
+                        name = { itemState.name }
+                        rarity = { itemState.rarity }
+                        stars = { itemState.avgStars }
+                    />
                 </Col>
-                <Col>
-                    <h1>Id: {itemId}</h1>
+
+                <Col xs={12} md={9}>
+                    {/* Componet ItemInfo whit params */}
+                    <ItemInfo 
+                        id = { itemId }
+                        name = { itemState.name }
+                        type = { itemState.type }
+                        rarity = { itemState.rarity }
+                        series = { itemSeries }
+                        ocurrences = {itemState.occurrences }
+                        firstOccurrences = { itemState.firstOccurrences }
+                        lastOccurrences = { itemState.lastOccurrences }
+                        img = { itemState.imgFeatured }
+                    />
                 </Col>
+
             </Row>
+
+            <br/>
+
+            <PopularItems/>
             
         </Container>
     );

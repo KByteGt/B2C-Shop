@@ -33,3 +33,17 @@
     min-width: 208px;
     min-height: 208px;
 }
+
+.bg_img {
+    width: 100%;
+    max-width: 400px;
+    min-height: 400px;
+    background: rgb(130,147,147);
+    background: radial-gradient(circle, rgba(130,147,147,1) 0%, rgba(196,213,208,1) 15%, rgba(255,255,255,0) 70%);
+}
+
+.star {
+    font-size: 25px;
+    color: #DB9400;
+    
+}
