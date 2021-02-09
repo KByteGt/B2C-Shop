@@ -54,6 +54,7 @@ const ItemDetail = (props) => {
     })
 
     let itemSeries = (itemState.series === null) ?  "Fortnite" : itemState.series;
+    const button = (itemState.cost == 0) ? <Button size="lg" block>Buy for free now</Button> : <Button size="lg" block>Buy for Q{ itemState.cost }</Button>;
 
     //Render
     return (
@@ -68,7 +69,8 @@ const ItemDetail = (props) => {
             <Row>
                 <Col xs={12} md={3}>
                 
-                    <Button size="lg" block>Buy for Q{ itemState.cost }</Button>
+                    {button}
+
                     <br/>
                     {/* Component ItemCard whit params */}
                     <ItemCard 
