@@ -5,23 +5,17 @@ import style from './ShoppingCart.module.css';
 
 const ShoppingCart = (props) => {
 
-    //Vars
-    let itemsList = [];
-    let totalCost = 0;
-
     //State
     const [amountState, setAmountState] = useState(0);
-    const [itemsState, setItemsState] = useState({
-        items: [],
-        length: 0
-    });
+    const [itemsState, setItemsState] = useState([]);
 
     //API request
     useEffect( () => {
         //Get items from local storage
         let idsCart = localStorage.getItem('itemsCart');
         let idsList = [];
-        
+        let itemsList = [];
+        let totalCost = 0;
 
         if(idsCart){
             idsList = JSON.parse(idsCart);
@@ -37,35 +31,48 @@ const ShoppingCart = (props) => {
                             cost: request.item.cost
                         }
 
-                        addItem(request);
+                        totalCost += item.cost;
+                        itemsList.push(item)
+                        
+                        setItemsState(itemsList);
+                        setAmountState(totalCost);
+
                     })
                     .catch( err => {
                         console.log(" **Request error: " + err);
                     });
             });          
         }
+        
+        if(itemsList){
+            console.log(itemsList)
+            //setItemsState(itemsList);
+            //setAmountState(totalCost);
+        }
 
     }, []);
 
-    let addItem = (item) => {
-        itemsList.push(item);
-        totalCost += item.cost;
+    let makePay = () => {
+        if(amountState !== 0) {
+            console.log(" Making the pay... Q" + amountState)
+
+            localStorage.clear();
+
+            setAmountState(0);
+            setItemsState([]);
+        }
     }
 
-    if(itemsList.length !== 0){
-        setItemsState({
-            items: itemsList,
-            length: itemsList.length
-        });
-
+    /*if(itemsList.length !== 0){
+        setItemsState(itemsList);
         setAmountState(totalCost);
-    }
+    }*/
 
     //Helpers
 
-    const totalAmount = (amountState === 0) ? "Free" : amountState;
+    const totalAmount = (amountState === 0) ? "Free" : "Q" + amountState;
     const totalItems = (itemsState.length === 0) ? "No items in the cart" : "Total items: " + itemsState.length;
-    let itemsListGroup = itemsState.items.map( (item, index) => {
+    let itemsListGroup = itemsState.map( (item, index) => {
         return (
             <ListGroup.Item key={ item.id }>
                 <strong>{ item.name}</strong>, {item.description} [ Q{item.cost} ]
@@ -88,7 +95,7 @@ const ShoppingCart = (props) => {
                 <Col xs={12} md={8}>
                     <Card>
                         <Card.Header>{ totalItems }</Card.Header>
-                        <ListGroup flush>
+                        <ListGroup>
                             {itemsListGroup}
                         </ListGroup>
                     </Card>
@@ -98,7 +105,7 @@ const ShoppingCart = (props) => {
                     <div className={style.card}>
                     <p>Total amount</p>
                         <h1>{ totalAmount }</h1>
-                        <Button variant="success" size="lg" block>Pay now</Button>
+                        <Button variant="success" size="lg" block onClick={ () => makePay()}>Pay now</Button>
                     </div>
                 </Col>
             </Row>

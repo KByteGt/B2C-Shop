@@ -36,6 +36,7 @@ const ItemDetail = (props) => {
         } else idsList.push(id);
             
         localStorage.setItem('itemsCart', JSON.stringify(idsList));
+        console.log("Adding item in local storage...")
     }
 
     //ComponentDidMount
