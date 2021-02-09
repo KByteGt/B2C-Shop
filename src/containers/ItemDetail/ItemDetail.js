@@ -24,6 +24,20 @@ const ItemDetail = (props) => {
         occurrences: 0
     })
 
+    //Function add Item to localstorege
+    let addItemCart = (id) => {
+        let itemsCart = localStorage.getItem('itemsCart');
+        let idsList = [];
+
+        if(itemsCart){
+            idsList = JSON.parse(itemsCart);
+            idsList.push(id);
+            idsList = Array.from(new Set(idsList));
+        } else idsList.push(id);
+            
+        localStorage.setItem('itemsCart', JSON.stringify(idsList));
+    }
+
     //ComponentDidMount
     useEffect( () => {
         //Consume API
@@ -54,7 +68,7 @@ const ItemDetail = (props) => {
     })
 
     let itemSeries = (itemState.series === null) ?  "Fortnite" : itemState.series;
-    const button = (itemState.cost == 0) ? <Button size="lg" block>Buy for free now</Button> : <Button size="lg" block>Buy for Q{ itemState.cost }</Button>;
+    const buttonText = (itemState.cost == 0) ? "Buy for free now" : "Buy for Q " + itemState.cost;
 
     //Render
     return (
@@ -69,7 +83,7 @@ const ItemDetail = (props) => {
             <Row>
                 <Col xs={12} md={3}>
                 
-                    {button}
+                    <Button size="lg" block onClick={ () =>  addItemCart(itemId) }>{buttonText}</Button>
 
                     <br/>
                     {/* Component ItemCard whit params */}
