@@ -1,5 +1,12 @@
-const About = (props) => {
-    return(<h1>About page</h1>)
+import { Container } from 'react-bootstrap';
+
+const About = () => {
+    return(
+        <Container>
+            <br/>
+            <h1>José Daniel López - @KByteGt</h1>
+        </Container>
+    );
 }
 
 export default About;
