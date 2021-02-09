@@ -1,5 +1,5 @@
 import { useEffect, useState} from 'react';
-import { Container, Row, Col, Card, Breadcrumb, Button, ListGroup, ListGroupItem  } from 'react-bootstrap';
+import { Container, Row, Col, Breadcrumb, Button } from 'react-bootstrap';
 import ItemCard from '../../components/Item/ItemCard';
 import ItemInfo from '../../components/Item/ItemInfo';
 import api from '../../axios';
@@ -68,7 +68,7 @@ const ItemDetail = (props) => {
     })
 
     let itemSeries = (itemState.series === null) ?  "Fortnite" : itemState.series;
-    const buttonText = (itemState.cost == 0) ? "Buy for free now" : "Buy for Q " + itemState.cost;
+    const buttonText = (itemState.cost === 0) ? "Buy for free now" : "Buy for Q " + itemState.cost;
 
     //Render
     return (

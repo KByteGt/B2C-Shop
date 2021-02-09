@@ -1,0 +1,12 @@
+.card {
+    width: 100%;
+    text-align: center;
+}
+
+.card h1 {
+    margin-bottom: 40px;
+}
+
+.card p {
+    margin-bottom: 10px;
+}

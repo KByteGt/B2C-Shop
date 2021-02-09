@@ -1,5 +1,4 @@
-import { Card, Badge } from 'react-bootstrap';
-import { Link } from 'react-router-dom'
+import { Card} from 'react-bootstrap';
 import style from './Item.module.css'
 
 const Item = (props) => {
