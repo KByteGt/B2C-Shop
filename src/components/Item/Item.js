@@ -36,7 +36,6 @@ const Item = (props) => {
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>
-                    <Card.Link href={'/item/' + itemId }>Buy</Card.Link>
                     <Card.Link href={'/item/' + itemId }>View more</Card.Link>
                 </Card.Footer>
             </Card>

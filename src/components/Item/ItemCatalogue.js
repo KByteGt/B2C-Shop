@@ -38,7 +38,7 @@ const ItemCatalogue = (props) => {
                         { description }
                     </Card.Text>
                     <Button variant="primary">
-                        Q{ props.cost } &nbsp; <FontAwesomeIcon icon={faCartPlus} style={{color: '#fff'}}/>
+                        <FontAwesomeIcon icon={faCartPlus} style={{color: '#fff'}}/> &nbsp; Q{ props.cost } 
                     </Button>
                 </Card.Body>
                 <Card.Footer>
