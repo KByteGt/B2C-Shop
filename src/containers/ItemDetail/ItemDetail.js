@@ -42,24 +42,24 @@ const ItemDetail = (props) => {
     //ComponentDidMount
     useEffect( () => {
         //Consume API
-        api.get('/item/get?id=' + itemId)
+        api.get('/item/' + itemId)
             .then( response => {
-                let item = response.data.data;
+                let item = response.data.item;
 
                 setItemState({
-                    id: item.itemId,
-                    name: item.item.name,
-                    description: item.item.description,
-                    type: item.item.type,
-                    rarity: item.item.rarity,
-                    series: item.item.series,
-                    cost: item.item.cost,
-                    imgIcon: item.item.images.icon,
-                    imgFeatured: item.item.images.featured,
-                    avgStars: item.item.ratings.avgStars,
-                    firstOccurrences: item.itemOccurrences.firstOccurrences,
-                    lastOccurrences: item.itemOccurrences.lastOccurrences,
-                    occurrences: item.itemOccurrences.occurrences
+                    id: item.id,
+                    name: item.name,
+                    description: item.description,
+                    type: item.type,
+                    rarity: item.rarity,
+                    series: item.series,
+                    cost: item.cost,
+                    imgIcon: item.imgIcon,
+                    imgFeatured: item.imgFeatured,
+                    avgStars: item.avgStars,
+                    firstOccurrences: item.firstOccurrences,
+                    lastOccurrences: item.lastOccurrences,
+                    occurrences: item.occurrences
                 });
 
             })

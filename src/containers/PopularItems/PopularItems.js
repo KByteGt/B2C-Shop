@@ -16,14 +16,14 @@ const PopularItems = (props) => {
             //Consume API
             api.get('/items/popular')
                 .then( response => {
-                    let itemsInfo = response.data.entries[1].entries
+                    let itemsInfo = response.data.items
                     itemsInfo = itemsInfo.map( item => ({
-                        id: item.identifier,
+                        id: item.id,
                         name: item.name,
                         description: item.description,
                         type: item.type,
                         rarity: item.rarity,
-                        img: item.images.transparent
+                        img: item.imgIcon
                     }));
 
                     itemsInfo = itemsInfo.filter( item => item.name !== "Randomize")

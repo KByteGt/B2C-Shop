@@ -3,9 +3,9 @@ import style from './Item.module.css'
 
 const ItemInfo = (props) => {
 
-    let img = (props.img === null) ? " " : <Col><div className={style.bg_img}><Image src={props.img} fluid/></div>;
+    let img = (props.img === null) ? " " : <Col><div className={style.bg_img}><Image src={props.img} fluid/></div>
     
-</Col>;
+</Col>
 
     return (
         <Card>

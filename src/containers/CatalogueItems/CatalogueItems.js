@@ -14,22 +14,22 @@ const CatalogueItems = (props) => {
 
         useEffect( () => {
             //Consume API
-            api.get('/store/get')
+            api.get('/item/items')
                 .then( response => {
 
-                    let itemsInfo = response.data.data;
+                    let itemsInfo = response.data.items;
 
                     console.log(itemsInfo)
                     
-                    itemsInfo = itemsInfo.map( i => ({
-                        id: i.itemId,
-                        name: i.item.name,
-                        description: i.item.description,
-                        type: i.item.type,
-                        rarity: i.item.rarity,
-                        img: i.item.images.icon,
-                        series: i.item.series,
-                        cost: i.store.cost
+                    itemsInfo = itemsInfo.map( item => ({
+                        id: item.id,
+                        name: item.name,
+                        description: item.description,
+                        type: item.type,
+                        rarity: item.rarity,
+                        img: item.imgIcon,
+                        series: item.series,
+                        cost: item.cost
                     }));
  
                     setItemsState({ items: [...itemsInfo], error: false });

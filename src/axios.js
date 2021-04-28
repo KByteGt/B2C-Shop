@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'https://fortnite-api.theapinetwork.com'
+    baseURL: 'http://localhost:2500/api'
 });
 
 export default instance;

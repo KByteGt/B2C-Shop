@@ -21,20 +21,20 @@ const ShoppingCart = (props) => {
             idsList = JSON.parse(idsCart);
 
             idsList.forEach(item => {
-                api.get('/item/get?id=' + item)
+                api.get('/item/' + item)
                     .then( response => {
-                        let request = response.data.data;
+                        let request = response.data.item;
                         let item = {
-                            id: request.itemId,
-                            name: request.item.name,
-                            description: request.item.description,
-                            cost: request.item.cost
+                            id: request.id,
+                            name: request.name,
+                            description: request.description,
+                            cost: request.cost
                         }
 
                         totalCost += item.cost;
                         itemsList.push(item)
                         
-                        setItemsState(itemsList);
+                        setItemsState([...itemsList]);
                         setAmountState(totalCost);
 
                     })
@@ -42,12 +42,6 @@ const ShoppingCart = (props) => {
                         console.log(" **Request error: " + err);
                     });
             });          
-        }
-        
-        if(itemsList){
-            console.log(itemsList)
-            //setItemsState(itemsList);
-            //setAmountState(totalCost);
         }
 
     }, []);
