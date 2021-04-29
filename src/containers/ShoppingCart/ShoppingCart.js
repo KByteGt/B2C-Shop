@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Container, Breadcrumb, Row, Col, Card, ListGroup, Button } from 'react-bootstrap';
+import { Container, Breadcrumb, Row, Col, Card, ListGroup, Button, Form } from 'react-bootstrap';
 import api from '../../axios';
 import style from './ShoppingCart.module.css';
 
@@ -8,6 +8,11 @@ const ShoppingCart = (props) => {
     //State
     const [amountState, setAmountState] = useState(0);
     const [itemsState, setItemsState] = useState([]);
+    const [clientState, setClientState] = useState({
+        firstName: null,
+        lastName: null,
+        email: null
+    })
 
     //API request
     useEffect( () => {
@@ -49,18 +54,16 @@ const ShoppingCart = (props) => {
     let makePay = () => {
         if(amountState !== 0) {
             console.log(" Making the pay... Q" + amountState)
+            console.log("Sending request to API...")
 
-            localStorage.clear();
 
-            setAmountState(0);
-            setItemsState([]);
+
+            //localStorage.clear();
+
+            //setAmountState(0);
+            //setItemsState([]);
         }
     }
-
-    /*if(itemsList.length !== 0){
-        setItemsState(itemsList);
-        setAmountState(totalCost);
-    }*/
 
     //Helpers
 
@@ -93,14 +96,38 @@ const ShoppingCart = (props) => {
                             {itemsListGroup}
                         </ListGroup>
                     </Card>
+                    <br/>
                 </Col>
 
                 <Col xs={12} md={4}>
-                    <div className={style.card}>
-                    <p>Total amount</p>
-                        <h1>{ totalAmount }</h1>
-                        <Button variant="success" size="lg" block onClick={ () => makePay()}>Pay now</Button>
-                    </div>
+
+                    <Form>
+                        <Form.Group controlId="formName">
+                            <Row>
+                                <Col>
+                                    <Form.Label>First name</Form.Label>
+                                    <Form.Control type="text" name="firstName" placeholder="Jonh"/>
+                                </Col>
+                                <Col>
+                                    <Form.Label>Last name</Form.Label>
+                                    <Form.Control type="text" name="lastName" placeholder="Doe"/>
+                                </Col>
+                            </Row>
+                        </Form.Group>
+                        <Form.Group controlId="formEmail">
+                            <Form.Label>E-mail</Form.Label>
+                            <Form.Control type="email" name="email" placeholder="Jonh@f-shop.gt"/>
+                        </Form.Group>
+
+                        <Form.Group>
+                        <div className={style.card}>
+                            <p>Total amount</p>
+                            <h1>{ totalAmount }</h1>
+                            <Button variant="success" size="lg" block type="submit" onClick={ () => makePay()}>Pay now</Button>
+                        </div>
+                        </Form.Group>
+
+                    </Form>
                 </Col>
             </Row>
             <br/>
