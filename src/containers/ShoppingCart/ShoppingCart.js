@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Container, Breadcrumb, Row, Col, Card, ListGroup, Button, Form } from 'react-bootstrap';
+import { Container, Breadcrumb, Row, Col, Card, ListGroup, Button, Form, Toast } from 'react-bootstrap';
 import api from '../../axios';
 import style from './ShoppingCart.module.css';
 
@@ -9,10 +9,10 @@ const ShoppingCart = (props) => {
     const [amountState, setAmountState] = useState(0);
     const [itemsState, setItemsState] = useState([]);
     const [clientState, setClientState] = useState({
-        firstName: null,
-        lastName: null,
-        email: null
-    })
+        firstName: '',
+        lastName: '',
+        email: ''
+    });
 
     //API request
     useEffect( () => {
@@ -51,18 +51,31 @@ const ShoppingCart = (props) => {
 
     }, []);
 
-    let makePay = () => {
-        if(amountState !== 0) {
+    let makePay = (event) => {
+        if(amountState !== 0 && clientState.firstName !== '' && clientState.lastName !== '' && clientState.email !== '') {
             console.log(" Making the pay... Q" + amountState)
             console.log("Sending request to API...")
 
+            const data = {
+                items: itemsState,
+                client: clientState
+            }
 
-
+            console.log("Client: ", data)
             //localStorage.clear();
 
             //setAmountState(0);
             //setItemsState([]);
+        } else {
+            console.log(" ** Faltan datos de contacto...")
         }
+    }
+
+    const handleInputChange = (event) => {
+        setClientState({
+            ...clientState,
+            [event.target.name] : event.target.value
+        })
     }
 
     //Helpers
@@ -88,6 +101,7 @@ const ShoppingCart = (props) => {
 
             <h1>Shopping Cart</h1>
             <hr/>
+
             <Row>
                 <Col xs={12} md={8}>
                     <Card>
@@ -101,29 +115,29 @@ const ShoppingCart = (props) => {
 
                 <Col xs={12} md={4}>
 
-                    <Form>
+                    <Form >
                         <Form.Group controlId="formName">
                             <Row>
                                 <Col>
                                     <Form.Label>First name</Form.Label>
-                                    <Form.Control type="text" name="firstName" placeholder="Jonh"/>
+                                    <Form.Control type="text" name="firstName" placeholder="Jonh" onChange={handleInputChange}/>
                                 </Col>
                                 <Col>
                                     <Form.Label>Last name</Form.Label>
-                                    <Form.Control type="text" name="lastName" placeholder="Doe"/>
+                                    <Form.Control type="text" name="lastName" placeholder="Doe" onChange={handleInputChange}/>
                                 </Col>
                             </Row>
                         </Form.Group>
                         <Form.Group controlId="formEmail">
                             <Form.Label>E-mail</Form.Label>
-                            <Form.Control type="email" name="email" placeholder="Jonh@f-shop.gt"/>
+                            <Form.Control type="email" name="email" placeholder="Jonh@f-shop.gt" onChange={handleInputChange}/>
                         </Form.Group>
 
                         <Form.Group>
                         <div className={style.card}>
                             <p>Total amount</p>
                             <h1>{ totalAmount }</h1>
-                            <Button variant="success" size="lg" block type="submit" onClick={ () => makePay()}>Pay now</Button>
+                            <Button variant="success" size="lg" block onClick={makePay}>Pay now</Button>
                         </div>
                         </Form.Group>
 
