@@ -21,12 +21,6 @@ const Home = (props) => {
 
             <PopularItems />
 
-            <h1>Explore Rarity</h1>
-            <hr />
-                
-            <h1>Lorem Impsun Dolor sit me.</h1>
-            <Button>Shop</Button>
-
         </Container>
         </>
     )
