@@ -2,7 +2,8 @@ import { useEffect, useState} from 'react';
 import loadingGift from '../../assets/img/loading.gif';
 import { CardColumns, Image } from 'react-bootstrap';
 import ItemCatalogue from '../../components/Item/ItemCatalogue';
-import api from '../../axios';
+import {config} from '../../config';
+import axios from 'axios';
 
 const CatalogueItems = (props) => {
 
@@ -14,30 +15,33 @@ const CatalogueItems = (props) => {
 
         useEffect( () => {
             //Consume API
-            api.get('/item/items')
-                .then( response => {
+            axios({
+                method: 'GET',
+                url: config.url.itemsApi+'/item/items'
+            })
+            .then( response => {
 
-                    let itemsInfo = response.data.items;
+                let itemsInfo = response.data.items;
 
-                    console.log(itemsInfo)
-                    
-                    itemsInfo = itemsInfo.map( item => ({
-                        id: item.id,
-                        name: item.name,
-                        description: item.description,
-                        type: item.type,
-                        rarity: item.rarity,
-                        img: item.imgIcon,
-                        series: item.series,
-                        cost: item.cost
-                    }));
- 
-                    setItemsState({ items: [...itemsInfo], error: false });
-                })
-                .catch( err => {
-                    console.log("Error: " + err)
-                    setItemsState({ items: [], error: true })
-                });
+                console.log(itemsInfo)
+                
+                itemsInfo = itemsInfo.map( item => ({
+                    id: item.id,
+                    name: item.name,
+                    description: item.description,
+                    type: item.type,
+                    rarity: item.rarity,
+                    img: item.imgIcon,
+                    series: item.series,
+                    cost: item.cost
+                }));
+
+                setItemsState({ items: [...itemsInfo], error: false });
+            })
+            .catch( err => {
+                console.log("Error: " + err)
+                setItemsState({ items: [], error: true })
+            });
         }, []);
 
         let items = <></>

@@ -1,8 +1,8 @@
 import { useEffect, useState} from 'react';
-//import { CardDeck } from 'react-bootstrap'
 import CardDeck from '../../components/CardDeck/CardDeck'
 import Item from '../../components/Item/Item';
-import api from '../../axios';
+import {config} from '../../config';
+import axios from 'axios';
 
 const PopularItems = (props) => {
 
@@ -14,25 +14,28 @@ const PopularItems = (props) => {
 
         useEffect( () => {
             //Consume API
-            api.get('/items/popular')
-                .then( response => {
-                    let itemsInfo = response.data.items
-                    itemsInfo = itemsInfo.map( item => ({
-                        id: item.id,
-                        name: item.name,
-                        description: item.description,
-                        type: item.type,
-                        rarity: item.rarity,
-                        img: item.imgIcon
-                    }));
+            axios({
+                method: 'GET',
+                url: config.url.itemsApi+'/items/popular'
+            })
+            .then( response => {
+                let itemsInfo = response.data.items
+                itemsInfo = itemsInfo.map( item => ({
+                    id: item.id,
+                    name: item.name,
+                    description: item.description,
+                    type: item.type,
+                    rarity: item.rarity,
+                    img: item.imgIcon
+                }));
 
-                    itemsInfo = itemsInfo.filter( item => item.name !== "Randomize")
+                itemsInfo = itemsInfo.filter( item => item.name !== "Randomize")
 
-                    setItemsState({ items: [...itemsInfo], error: false });
-                })
-                .catch( err => {
-                    setItemsState({ items: [], error: true })
-                });
+                setItemsState({ items: [...itemsInfo], error: false });
+            })
+            .catch( err => {
+                setItemsState({ items: [], error: true })
+            });
         }, []);
 
         let items = <></>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Container, Breadcrumb, Row, Col, Card, ListGroup, Button, Form, Toast } from 'react-bootstrap';
-import api from '../../axios';
+import { Container, Breadcrumb, Row, Col, Card, ListGroup, Button, Form} from 'react-bootstrap';
+import { config } from '../../config';
+import axios from 'axios'
 import style from './ShoppingCart.module.css';
 
 const ShoppingCart = (props) => {
@@ -26,26 +27,30 @@ const ShoppingCart = (props) => {
             idsList = JSON.parse(idsCart);
 
             idsList.forEach(item => {
-                api.get('/item/' + item)
-                    .then( response => {
-                        let request = response.data.item;
-                        let item = {
-                            id: request.id,
-                            name: request.name,
-                            description: request.description,
-                            cost: request.cost
-                        }
 
-                        totalCost += item.cost;
-                        itemsList.push(item)
-                        
-                        setItemsState([...itemsList]);
-                        setAmountState(totalCost);
+                axios({
+                    method: 'GET',
+                    url: config.url.itemsApi+'/item/'+item
+                })
+                .then( response => {
+                    let request = response.data.item;
+                    let item = {
+                        id: request.id,
+                        name: request.name,
+                        description: request.description,
+                        cost: request.cost
+                    }
 
-                    })
-                    .catch( err => {
-                        console.log(" **Request error: " + err);
-                    });
+                    totalCost += item.cost;
+                    itemsList.push(item)
+                    
+                    setItemsState([...itemsList]);
+                    setAmountState(totalCost);
+
+                })
+                .catch( err => {
+                    console.log(" **Request error: " + err);
+                });
             });          
         }
 
@@ -54,18 +59,43 @@ const ShoppingCart = (props) => {
     let makePay = (event) => {
         if(amountState !== 0 && clientState.firstName !== '' && clientState.lastName !== '' && clientState.email !== '') {
             console.log(" Making the pay... Q" + amountState)
-            console.log("Sending request to API...")
 
+            let itemsList = JSON.parse(localStorage.getItem('itemsCart') || '[]');
             const data = {
-                items: itemsState,
+                items: itemsList,
                 client: clientState
             }
 
-            console.log("Client: ", data)
-            //localStorage.clear();
+            axios({
+                method: 'POST',
+                url: config.url.checkoutApi+'/purchase',
+                data: data,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then( response => {
+                console.log(response.data);
+                console.log("Client: ", data)
 
-            //setAmountState(0);
-            //setItemsState([]);
+                localStorage.clear();
+
+                setAmountState(0);
+                setItemsState([]);
+                setClientState({
+                    firstName: '',
+                    lastName: '',
+                    email: ''
+                });
+
+                alert('Thanks, enjoy your new items!!!');
+            })
+            .catch( err => {
+                console.log(err);
+                alert('Sorry, but your purchase has been declined :(');
+            })
+
+            
         } else {
             console.log(" ** Faltan datos de contacto...")
         }

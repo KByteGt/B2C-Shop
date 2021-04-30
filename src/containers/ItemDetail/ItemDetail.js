@@ -2,8 +2,9 @@ import { useEffect, useState} from 'react';
 import { Container, Row, Col, Breadcrumb, Button } from 'react-bootstrap';
 import ItemCard from '../../components/Item/ItemCard';
 import ItemInfo from '../../components/Item/ItemInfo';
-import api from '../../axios';
 import PopularItems from '../PopularItems/PopularItems';
+import axios from 'axios';
+import { config } from '../../config';
 
 const ItemDetail = (props) => {
     const itemId = props.match.params.itemId;
@@ -37,35 +38,40 @@ const ItemDetail = (props) => {
             
         localStorage.setItem('itemsCart', JSON.stringify(idsList));
         console.log("Adding item in local storage...")
+        
+        alert('thanks, Item added to the cart :)');
     }
 
     //ComponentDidMount
     useEffect( () => {
         //Consume API
-        api.get('/item/' + itemId)
-            .then( response => {
-                let item = response.data.item;
+        axios({
+            method: 'GET',
+            url: config.url.itemsApi+'/item/'+itemId
+        })
+        .then( response => {
+            let item = response.data.item;
 
-                setItemState({
-                    id: item.id,
-                    name: item.name,
-                    description: item.description,
-                    type: item.type,
-                    rarity: item.rarity,
-                    series: item.series,
-                    cost: item.cost,
-                    imgIcon: item.imgIcon,
-                    imgFeatured: item.imgFeatured,
-                    avgStars: item.avgStars,
-                    firstOccurrences: item.firstOccurrences,
-                    lastOccurrences: item.lastOccurrences,
-                    occurrences: item.occurrences
-                });
-
-            })
-            .catch( err => {
-                console.log(" **Error: " + err);
+            setItemState({
+                id: item.id,
+                name: item.name,
+                description: item.description,
+                type: item.type,
+                rarity: item.rarity,
+                series: item.series,
+                cost: item.cost,
+                imgIcon: item.imgIcon,
+                imgFeatured: item.imgFeatured,
+                avgStars: item.avgStars,
+                firstOccurrences: item.firstOccurrences,
+                lastOccurrences: item.lastOccurrences,
+                occurrences: item.occurrences
             });
+
+        })
+        .catch( err => {
+            console.log(" **Error: " + err);
+        });
     })
 
     let itemSeries = (itemState.series === null) ?  "Fortnite" : itemState.series;
