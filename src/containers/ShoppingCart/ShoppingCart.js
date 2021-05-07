@@ -7,6 +7,7 @@ import style from './ShoppingCart.module.css';
 const ShoppingCart = (props) => {
 
     //State
+    const [invoiceState, setInvoiceState] = useState({});
     const [amountState, setAmountState] = useState(0);
     const [itemsState, setItemsState] = useState([]);
     const [clientState, setClientState] = useState({
@@ -80,6 +81,8 @@ const ShoppingCart = (props) => {
 
                 localStorage.clear();
 
+                setInvoiceState(response.data);
+
                 setAmountState(0);
                 setItemsState([]);
                 setClientState({
@@ -119,6 +122,8 @@ const ShoppingCart = (props) => {
             </ListGroup.Item>
         );
     });
+
+    const invoiceDetail = (invoiceState.invoice) ? <ListGroup.Item key={invoiceState.invoice}><strong>Your Invoice ID: </strong> {invoiceState.invoice_id}</ListGroup.Item> : '' ;
     
     //Render
     return(
@@ -138,6 +143,7 @@ const ShoppingCart = (props) => {
                         <Card.Header>{ totalItems }</Card.Header>
                         <ListGroup>
                             {itemsListGroup}
+                            {invoiceDetail}
                         </ListGroup>
                     </Card>
                     <br/>
