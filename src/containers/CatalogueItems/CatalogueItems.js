@@ -44,7 +44,7 @@ const CatalogueItems = (props) => {
             });
         }, []);
 
-        let items = <></>
+        let items = null;
         if(itemsState.error){
             items = <div className="text-center"><Image src={loadingGift} style={{width: "50px"}}/></div>;
         } else {
